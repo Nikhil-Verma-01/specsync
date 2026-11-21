@@ -1,0 +1,51 @@
+openapi: "3.0.3"
+info:
+  title: Test API
+  version: "1.0.0"
+
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      summary: List all users
+      responses:
+        "200":
+          description: OK
+    post:
+      operationId: createUser
+      summary: Create a user
+      responses:
+        "201":
+          description: Created
+
+  /users/{id}:
+    get:
+      operationId: getUserById
+      summary: Get a user by ID
+      responses:
+        "200":
+          description: OK
+    put:
+      operationId: updateUser
+      summary: Update a user
+      responses:
+        "200":
+          description: OK
+    delete:
+      operationId: deleteUser
+      summary: Delete a user
+      responses:
+        "204":
+          description: No Content
+
+  /orders:
+    get:
+      operationId: listOrders
+      responses:
+        "200":
+          description: OK
+    post:
+      operationId: createOrder
+      responses:
+        "201":
+          description: Created

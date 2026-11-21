@@ -1,0 +1,44 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Test API JSON",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/products": {
+      "get": {
+        "operationId": "listProducts",
+        "summary": "List all products",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "post": {
+        "operationId": "createProduct",
+        "responses": {
+          "201": { "description": "Created" }
+        }
+      }
+    },
+    "/products/{productId}": {
+      "get": {
+        "operationId": "getProduct",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "patch": {
+        "operationId": "updateProduct",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "delete": {
+        "operationId": "deleteProduct",
+        "responses": {
+          "204": { "description": "No Content" }
+        }
+      }
+    }
+  }
+}

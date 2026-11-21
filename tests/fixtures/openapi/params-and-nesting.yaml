@@ -1,0 +1,33 @@
+openapi: "3.0.3"
+info:
+  title: Express Params API
+  version: "1.0.0"
+
+paths:
+  # These use OpenAPI {param} style already - parser should normalise correctly
+  /users/{id}:
+    get:
+      operationId: getUser
+      responses:
+        "200":
+          description: OK
+    delete:
+      operationId: deleteUser
+      responses:
+        "204":
+          description: No Content
+
+  /orgs/{orgId}/members/{memberId}:
+    get:
+      operationId: getMember
+      responses:
+        "200":
+          description: OK
+
+  # Path with trailing slash — normaliser should strip it
+  /health:
+    get:
+      operationId: healthCheck
+      responses:
+        "200":
+          description: OK
