@@ -1,0 +1,70 @@
+{
+  "name": "@specsync/cli",
+  "version": "0.1.0",
+  "description": "Static Express-to-OpenAPI drift detector. Catch undocumented, stale, and mismatched routes before they ship.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "specsync": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "npm run build",
+    "pack:dry": "npm pack --dry-run",
+    "pack:smoke": "tsx scripts/smoke-pack.ts",
+    "dev": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ci": "vitest run --reporter=verbose",
+    "test:smoke": "vitest run tests/pack-smoke.test.ts",
+    "lint": "tsc --noEmit",
+    "benchmark": "npx tsx scripts/benchmark.ts"
+  },
+  "keywords": [
+    "express",
+    "openapi",
+    "swagger",
+    "drift-detection",
+    "api",
+    "static-analysis",
+    "cli",
+    "specsync"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/specsync/cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/specsync/cli/issues"
+  },
+  "homepage": "https://github.com/specsync/cli#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "express": "^5.3.0",
+    "fast-glob": "^3.3.3",
+    "picocolors": "^1.1.1",
+    "typescript": "^5.7.3",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "tsup": "^8.3.6",
+    "tsx": "^4.19.3",
+    "vitest": "^3.0.5"
+  }
+}
