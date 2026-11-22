@@ -244,6 +244,8 @@ SpecSync automatically detects GitHub Actions (`GITHUB_ACTIONS=true`) and emits 
 
 #### Option A: Using the turnkey SpecSync GitHub Action
 
+Use trusted, fixed values for the composite action inputs because the action evaluates a shell command. If you need to pass values derived from a pull request, use the CLI directly and pass them as quoted arguments through environment variables.
+
 ```yaml
 name: API Drift Check
 
@@ -346,14 +348,37 @@ SpecSync focuses strictly on deterministic static analysis. When code uses dynam
 
 ## Contributing
 
-Contributions, bug reports, and PRs are welcome!
+### Open an issue or pull request
 
-1. Clone the repository: `git clone https://github.com/nikhilverma/specsync.git`
-2. Install dependencies: `npm install`
-3. Run tests: `npm test`
-4. Run typecheck: `npm run typecheck`
-5. Run benchmarks: `npm run benchmark`
-6. Build: `npm run build`
+1. Search the [GitHub issues](https://github.com/Nikhil-Verma-01/specsync/issues) for existing reports. For a bug, include the SpecSync and Node.js versions, the command you ran, the expected and actual results, and a minimal Express and OpenAPI example using synthetic data. Discuss breaking changes and large features in an issue before starting work.
+2. [Fork SpecSync](https://github.com/Nikhil-Verma-01/specsync/fork), clone your fork, and create a branch from the upstream `main` branch. Use Node.js 22 for local development and install the locked dependencies with `npm ci`.
+3. Open a focused pull request against `main`. Explain what changed, why it changed, and how you verified it. Link the related issue and call out breaking changes to CLI flags, exit codes, configuration, or report output. Keep review feedback specific and respectful.
+
+### Verify your changes
+
+Run these checks for code changes before requesting review.
+
+```bash
+npm run typecheck
+npm test
+npm run build
+```
+
+- Add a focused regression test for behavior changes. Put small Express and OpenAPI fixtures under `tests/fixtures/` and update the README or examples when user-facing behavior changes.
+- Keep route analysis static. Tests should run without starting the target Express app or connecting to its database. Report unsupported dynamic routes as analysis limitations to avoid false drift errors.
+- Run `npm run pack:dry` and `npm run pack:smoke` for CLI packaging or release changes. Run `npm run benchmark` when changing route extraction or performance, and include the results in the PR.
+- Check the [CI workflow](./.github/workflows/ci.yml) for failures across its Node.js matrix. Maintainers should merge through a reviewed PR after the CI checks pass.
+
+### Keep contributions safe
+
+- Review the diff before pushing. Keep credentials, token-bearing `.npmrc` files, secret-bearing `.env` files, private OpenAPI specs, and production data out of commits, fixtures, issues, and logs. If a credential is exposed, revoke or rotate it immediately and notify a maintainer privately.
+- Explain any new dependency or upgrade in the PR. Verify its source and review its transitive changes. Commit the matching `package-lock.json` when dependencies change.
+- Run fork PR code in `pull_request` workflows with no publishing credentials and read-only permissions as needed. Keep untrusted PR code out of privileged workflows, including `pull_request_target`. Pin new third-party actions to full commit SHAs and pass untrusted input as data instead of interpolating it into shell scripts. [GitHub Actions secure use guidance](https://docs.github.com/en/actions/reference/security/secure-use)
+- Review workflow files, `action.yml`, dependency changes, and npm scripts before approving a fork workflow run. Maintainers handle release tags and npm publishing through the [release workflow](./.github/workflows/release.yml).
+
+### Report vulnerabilities privately
+
+Use **Report a vulnerability** on the [Security advisories page](https://github.com/Nikhil-Verma-01/specsync/security/advisories) if the button is available. Otherwise, open a GitHub issue asking for a private security contact and keep all vulnerability details out of the public issue. Share affected versions and impact once you have a private channel, and coordinate disclosure with the maintainers. [GitHub private reporting guidance](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately)
 
 ---
 
