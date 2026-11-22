@@ -1,0 +1,46 @@
+name: API Drift Check
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  # Approach 1: Using the turnkey SpecSync GitHub Action
+  specsync-action:
+    name: SpecSync (Composite Action)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run SpecSync Drift Check
+        uses: nikhilverma/specsync@v0.1.0
+        with:
+          openapi: './openapi.yaml'
+          source: 'src/**/*.ts'
+          fail-on: 'error'
+
+  # Approach 2: Using npx directly (Zero installation required)
+  specsync-cli:
+    name: SpecSync (CLI via npx)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run SpecSync Drift Check
+        run: npx --yes @specsync/cli check
+        # SpecSync automatically detects GITHUB_ACTIONS=true and emits
+        # workflow command annotations (::error and ::warning) directly onto PR diffs!
