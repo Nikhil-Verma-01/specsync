@@ -1,0 +1,41 @@
+openapi: "3.0.3"
+info:
+  title: "Barrel Export API"
+  version: "1.0.0"
+paths:
+  /users:
+    get:
+      summary: "List users"
+      responses:
+        "200":
+          description: "User list"
+  /users/{id}:
+    get:
+      summary: "Get user by ID"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "User details"
+  /orders:
+    post:
+      summary: "Create order"
+      responses:
+        "200":
+          description: "Order confirmation"
+  /orders/{orderId}:
+    get:
+      summary: "Get order by ID"
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Order details"

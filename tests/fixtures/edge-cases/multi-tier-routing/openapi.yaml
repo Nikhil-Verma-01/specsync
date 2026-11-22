@@ -1,0 +1,16 @@
+openapi: 3.0.0
+info:
+  title: Multi-tier Routing API
+  version: 1.0.0
+paths:
+  /api/v1/users/{id}:
+    get:
+      summary: Get user by ID
+      responses:
+        '200':
+          description: OK
+    delete:
+      summary: Delete user by ID
+      responses:
+        '204':
+          description: No Content

@@ -1,0 +1,30 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Products API Swagger 2.0",
+    "version": "1.0.0"
+  },
+  "basePath": "/api/v2",
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "List products",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "delete": {
+        "summary": "Delete product",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  }
+}

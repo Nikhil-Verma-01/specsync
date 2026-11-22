@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: Products API with Server Base Path
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/api/v2
+    description: Production server
+paths:
+  /products:
+    get:
+      summary: List products
+      responses:
+        '200':
+          description: OK
+  /products/{id}:
+    delete:
+      summary: Delete product
+      responses:
+        '204':
+          description: No Content
