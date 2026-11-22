@@ -173,7 +173,13 @@ describe("e2e: CLI process execution", () => {
 
   it("suppresses output when --quiet flag is provided", async () => {
     const configPath = path.join(SCENARIOS, "undocumented-route", "specsync.json");
-    const { stdout, exitCode } = await runCli(["check", "-c", configPath, "--quiet"]);
+    const { stdout, exitCode } = await runCli([
+      "check",
+      "-c",
+      configPath,
+      "--quiet",
+      "--github-annotations",
+    ]);
 
     expect(exitCode).toBe(1);
     expect(stdout.trim()).toBe("");

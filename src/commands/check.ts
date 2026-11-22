@@ -93,10 +93,12 @@ export async function checkCommand(
   try {
     const result = await runCheck(options);
 
-    if (options.format === "json") {
-      printJsonReport(result);
-    } else {
-      printTerminalReport(result, { quiet: options.quiet });
+    if (!options.quiet) {
+      if (options.format === "json") {
+        printJsonReport(result);
+      } else {
+        printTerminalReport(result);
+      }
     }
 
     const shouldAnnotate =
@@ -104,7 +106,7 @@ export async function checkCommand(
         ? options.githubAnnotations
         : process.env.GITHUB_ACTIONS === "true";
 
-    if (shouldAnnotate && options.format !== "json") {
+    if (!options.quiet && shouldAnnotate && options.format !== "json") {
       printGitHubAnnotations(result);
     }
 
@@ -112,20 +114,22 @@ export async function checkCommand(
   } catch (err) {
     const message = (err as Error).message || String(err);
 
-    if (options.format === "json") {
-      console.log(
-        JSON.stringify(
-          {
-            specsync: "0.1.0",
-            error: message,
-            exitCode: 1,
-          },
-          null,
-          2
-        )
-      );
-    } else {
-      console.error(pc.red(pc.bold("✖ ERROR: ")) + message);
+    if (!options.quiet) {
+      if (options.format === "json") {
+        console.log(
+          JSON.stringify(
+            {
+              specsync: "0.1.0",
+              error: message,
+              exitCode: 1,
+            },
+            null,
+            2
+          )
+        );
+      } else {
+        console.error(pc.red(pc.bold("✖ ERROR: ")) + message);
+      }
     }
 
     process.exitCode = 1;
