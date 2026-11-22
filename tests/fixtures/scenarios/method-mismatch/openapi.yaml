@@ -1,0 +1,11 @@
+openapi: 3.0.3
+info:
+  title: Method Mismatch API
+  version: 1.0.0
+paths:
+  /orders:
+    get:
+      summary: Get orders
+      responses:
+        "200":
+          description: OK
