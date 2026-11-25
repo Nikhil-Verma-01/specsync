@@ -1,0 +1,186 @@
+{
+  "specsync": "0.1.0",
+  "generatedAt": "2026-10-20T12:46:02.840Z",
+  "totalTargets": 5,
+  "results": [
+    {
+      "id": "openapi-project",
+      "name": "rabindratamang/openapi-project",
+      "timestamp": "2026-10-20T12:45:59.660Z",
+      "durationMs": 698,
+      "exitCode": 0,
+      "routesAnalyzed": 12,
+      "openApiOperations": 12,
+      "undocumentedCount": 0,
+      "staleCount": 0,
+      "methodMismatches": 0,
+      "limitationsCount": 0,
+      "limitationTypes": [],
+      "discrepancies": [],
+      "limitations": [],
+      "analysisNotes": "Design-first Express app with modular v1/v2/auth routers and middlewares"
+    },
+    {
+      "id": "eov-example",
+      "name": "cdimascio/express-openapi-validator-example",
+      "timestamp": "2026-10-20T12:46:00.450Z",
+      "durationMs": 784,
+      "exitCode": 0,
+      "routesAnalyzed": 4,
+      "openApiOperations": 5,
+      "undocumentedCount": 0,
+      "staleCount": 0,
+      "methodMismatches": 1,
+      "limitationsCount": 0,
+      "limitationTypes": [],
+      "discrepancies": [
+        {
+          "type": "METHOD_MISMATCH",
+          "method": "DELETE",
+          "path": "/v1/pets/{id}",
+          "message": "HTTP method DELETE is declared in OpenAPI for \"/v1/pets/{id}\", but code only implements: [GET]."
+        }
+      ],
+      "limitations": [],
+      "analysisNotes": "Express + OpenAPI validator example; tests real-world drift detection (unimplemented DELETE endpoint)"
+    },
+    {
+      "id": "eov-standard",
+      "name": "cdimascio/express-openapi-validator (1-standard)",
+      "timestamp": "2026-10-20T12:46:01.191Z",
+      "durationMs": 740,
+      "exitCode": 0,
+      "routesAnalyzed": 6,
+      "openApiOperations": 6,
+      "undocumentedCount": 0,
+      "staleCount": 0,
+      "methodMismatches": 0,
+      "limitationsCount": 0,
+      "limitationTypes": [],
+      "discrepancies": [],
+      "limitations": [],
+      "analysisNotes": "Standard Express API example with OAS 3.0 spec and parameterized paths"
+    },
+    {
+      "id": "realworld-express",
+      "name": "gothinkster/node-express-realworld-example-app",
+      "timestamp": "2026-10-20T12:46:02.073Z",
+      "durationMs": 881,
+      "exitCode": 0,
+      "routesAnalyzed": 19,
+      "openApiOperations": 19,
+      "undocumentedCount": 0,
+      "staleCount": 0,
+      "methodMismatches": 0,
+      "limitationsCount": 0,
+      "limitationTypes": [],
+      "discrepancies": [],
+      "limitations": [],
+      "analysisNotes": "Full TypeScript RealWorld Conduit implementation with controllers and articles/user/tag routes"
+    },
+    {
+      "id": "node-express-boilerplate",
+      "name": "hagopj13/node-express-boilerplate",
+      "timestamp": "2026-10-20T12:46:02.840Z",
+      "durationMs": 766,
+      "exitCode": 0,
+      "routesAnalyzed": 14,
+      "openApiOperations": 0,
+      "undocumentedCount": 13,
+      "staleCount": 0,
+      "methodMismatches": 0,
+      "limitationsCount": 1,
+      "limitationTypes": [
+        "UNSUPPORTED_PATTERN"
+      ],
+      "discrepancies": [
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "GET",
+          "path": "/",
+          "message": "Route GET \"/\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "POST",
+          "path": "/",
+          "message": "Route POST \"/\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "DELETE",
+          "path": "/{userId}",
+          "message": "Route DELETE \"/{userId}\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "GET",
+          "path": "/{userId}",
+          "message": "Route GET \"/{userId}\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "PATCH",
+          "path": "/{userId}",
+          "message": "Route PATCH \"/{userId}\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "POST",
+          "path": "/forgot-password",
+          "message": "Route POST \"/forgot-password\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "POST",
+          "path": "/login",
+          "message": "Route POST \"/login\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "POST",
+          "path": "/logout",
+          "message": "Route POST \"/logout\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "POST",
+          "path": "/refresh-tokens",
+          "message": "Route POST \"/refresh-tokens\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "POST",
+          "path": "/register",
+          "message": "Route POST \"/register\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "POST",
+          "path": "/reset-password",
+          "message": "Route POST \"/reset-password\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "POST",
+          "path": "/send-verification-email",
+          "message": "Route POST \"/send-verification-email\" exists in source but is missing from OpenAPI specification."
+        },
+        {
+          "type": "UNDOCUMENTED_ROUTE",
+          "method": "POST",
+          "path": "/verify-email",
+          "message": "Route POST \"/verify-email\" exists in source but is missing from OpenAPI specification."
+        }
+      ],
+      "limitations": [
+        {
+          "type": "UNSUPPORTED_PATTERN",
+          "message": "Route pattern \"*\" contains wildcards or regex syntax not supported in static analysis.",
+          "file": "C:\\Users\\NikhilVerma\\Projects\\specsync\\.benchmarks\\node-express-boilerplate\\src\\app.js"
+        }
+      ],
+      "analysisNotes": "Popular Express boilerplate (~7k stars); tests dynamic loop-based route registration safety boundaries"
+    }
+  ]
+}

@@ -14,7 +14,7 @@ const CLI_PATH = path.join(ROOT_DIR, "src", "cli.ts");
 const TSX_CLI = path.join(ROOT_DIR, "node_modules", "tsx", "dist", "cli.mjs");
 
 // Helper to execute the CLI via tsx directly with Node
-async function runCli(args: string[]): Promise<{
+async function runCli(args: string[], env: NodeJS.ProcessEnv = {}): Promise<{
   stdout: string;
   stderr: string;
   exitCode: number;
@@ -26,7 +26,7 @@ async function runCli(args: string[]): Promise<{
       {
         cwd: ROOT_DIR,
         timeout: 15000,
-        env: { ...process.env, NO_COLOR: "1" },
+        env: { ...process.env, NO_COLOR: "1", ...env },
       }
     );
     return { stdout, stderr, exitCode: 0 };
@@ -129,6 +129,15 @@ describe("e2e: programmatic runCheck across scenarios", () => {
 // ─── 2. Process-Level CLI Invocations ───────────────────────────────────────
 
 describe("e2e: CLI process execution", () => {
+  const annotationModes = [
+    { mode: "auto-detected", githubActions: "true", flags: [] },
+    {
+      mode: "explicitly enabled",
+      githubActions: "false",
+      flags: ["--github-annotations"],
+    },
+  ];
+
   it("prints help and exits 0 on `check --help`", async () => {
     const { stdout, exitCode } = await runCli(["check", "--help"]);
 
@@ -171,19 +180,20 @@ describe("e2e: CLI process execution", () => {
     expect(parsed.discrepancies[0].type).toBe("UNDOCUMENTED_ROUTE");
   });
 
-  it("suppresses output when --quiet flag is provided", async () => {
-    const configPath = path.join(SCENARIOS, "undocumented-route", "specsync.json");
-    const { stdout, exitCode } = await runCli([
-      "check",
-      "-c",
-      configPath,
-      "--quiet",
-      "--github-annotations",
-    ]);
+  it.each(annotationModes)(
+    "suppresses output with --quiet and $mode annotations",
+    async ({ githubActions, flags }) => {
+      const configPath = path.join(SCENARIOS, "undocumented-route", "specsync.json");
+      const { stdout, stderr, exitCode } = await runCli(
+        ["check", "-c", configPath, "--quiet", ...flags],
+        { GITHUB_ACTIONS: githubActions }
+      );
 
-    expect(exitCode).toBe(1);
-    expect(stdout.trim()).toBe("");
-  });
+      expect(exitCode).toBe(1);
+      expect(stdout).toBe("");
+      expect(stderr).toBe("");
+    }
+  );
 
   it("exits 0 with --fail-on never even when drift exists", async () => {
     const configPath = path.join(SCENARIOS, "undocumented-route", "specsync.json");
@@ -198,28 +208,26 @@ describe("e2e: CLI process execution", () => {
     expect(exitCode).toBe(0);
   });
 
-  it("outputs GitHub Actions annotations when --github-annotations is passed", async () => {
-    const configPath = path.join(SCENARIOS, "undocumented-route", "specsync.json");
-    const { stdout, exitCode } = await runCli([
-      "check",
-      "-c",
-      configPath,
-      "--github-annotations",
-    ]);
+  it.each(annotationModes)(
+    "outputs $mode GitHub Actions annotations",
+    async ({ githubActions, flags }) => {
+      const configPath = path.join(SCENARIOS, "undocumented-route", "specsync.json");
+      const { stdout, exitCode } = await runCli(["check", "-c", configPath, ...flags], {
+        GITHUB_ACTIONS: githubActions,
+      });
 
-    expect(exitCode).toBe(1);
-    expect(stdout).toContain("::error ");
-    expect(stdout).toContain("title=UNDOCUMENTED_ROUTE");
-  });
+      expect(exitCode).toBe(1);
+      expect(stdout).toContain("::error ");
+      expect(stdout).toContain("title=UNDOCUMENTED_ROUTE");
+    }
+  );
 
   it("suppresses GitHub Actions annotations when --no-github-annotations is passed", async () => {
     const configPath = path.join(SCENARIOS, "undocumented-route", "specsync.json");
-    const { stdout, exitCode } = await runCli([
-      "check",
-      "-c",
-      configPath,
-      "--no-github-annotations",
-    ]);
+    const { stdout, exitCode } = await runCli(
+      ["check", "-c", configPath, "--no-github-annotations"],
+      { GITHUB_ACTIONS: "true" }
+    );
 
     expect(exitCode).toBe(1);
     expect(stdout).not.toContain("::error ");
