@@ -1,5 +1,5 @@
 {
-  "name": "@specsync/cli",
+  "name": "@specsyncs/cli",
   "version": "0.1.0",
   "description": "Static Express-to-OpenAPI drift detector. Catch undocumented, stale, and mismatched routes before they ship.",
   "publishConfig": {

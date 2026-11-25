@@ -4,7 +4,7 @@
 
 **Zero-server-startup, zero-runtime-instrumentation static Express-to-OpenAPI drift detector.**
 
-[![npm version](https://img.shields.io/badge/npm-v0.1.0-blue.svg?style=flat-square)](https://www.npmjs.com/package/@specsync/cli)
+[![npm version](https://img.shields.io/badge/npm-v0.1.0-blue.svg?style=flat-square)](https://www.npmjs.com/package/@specsyncs/cli)
 [![license](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](./LICENSE)
 [![node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg?style=flat-square)](https://nodejs.org/)
 [![typescript](https://img.shields.io/badge/typescript-5.7-blue.svg?style=flat-square)](https://www.typescriptlang.org/)
@@ -51,13 +51,13 @@ Existing tools fail to solve this practically:
 Run directly without installing via `npx`:
 
 ```bash
-npx @specsync/cli check --openapi openapi.yaml
+npx @specsyncs/cli@next check --openapi openapi.yaml
 ```
 
 Or install locally in your project:
 
 ```bash
-npm install -D @specsync/cli
+npm install -D @specsyncs/cli@next
 ```
 
 Add a drift-check script to `package.json`:
@@ -275,7 +275,7 @@ jobs:
 
 ```yaml
       - name: Verify Express routes against OpenAPI spec
-        run: npx --yes @specsync/cli check --fail-on error
+        run: npx --yes @specsyncs/cli@next check --fail-on error
 ```
 
 ### GitLab CI
@@ -288,7 +288,7 @@ api-drift-check:
   image: node:20
   script:
     - npm ci
-    - npx @specsync/cli check --fail-on error
+    - npx @specsyncs/cli@next check --fail-on error
 ```
 
 ### Pre-commit Hook (`lint-staged`)
@@ -316,7 +316,7 @@ import {
   extractExpressRoutes,
   parseOpenApiSpec,
   compareRoutes
-} from "@specsync/cli";
+} from "@specsyncs/cli";
 
 // High-level execution
 const result = await runCheck({

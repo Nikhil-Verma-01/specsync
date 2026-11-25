@@ -41,6 +41,6 @@ jobs:
           node-version: '20'
 
       - name: Run SpecSync Drift Check
-        run: npx --yes @specsync/cli check
+        run: npx --yes @specsyncs/cli@next check
         # SpecSync automatically detects GITHUB_ACTIONS=true and emits
         # workflow command annotations (::error and ::warning) directly onto PR diffs!

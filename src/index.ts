@@ -1,5 +1,5 @@
 /**
- * @specsync/cli — Public Programmatic API
+ * @specsyncs/cli — Public Programmatic API
  *
  * Static Express-to-OpenAPI drift detector. Catch undocumented, stale,
  * and mismatched routes before they ship.

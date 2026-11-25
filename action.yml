@@ -36,7 +36,7 @@ runs:
     - name: Run SpecSync Drift Check
       shell: bash
       run: |
-        CMD="npx --yes @specsync/cli check"
+        CMD="npx --yes @specsyncs/cli@next check"
         if [ -n "${{ inputs.config }}" ]; then
           CMD="$CMD --config '${{ inputs.config }}'"
         fi

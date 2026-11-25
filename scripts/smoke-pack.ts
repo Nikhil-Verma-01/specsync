@@ -1,7 +1,7 @@
 /**
  * SpecSync Distribution Smoke Test
  *
- * Verifies that the packed npm tarball (@specsync/cli@0.1.0.tgz):
+ * Verifies that the packed npm tarball for @specsyncs/cli:
  * 1. Contains all required files and no unwanted source/test files.
  * 2. Installs cleanly in an isolated project.
  * 3. CLI binary executes successfully with correct exit codes.
@@ -126,7 +126,7 @@ export async function runPackSmokeTest(): Promise<void> {
 
     // 4. Test CLI binary execution
     console.log("\nStep 4: Executing installed CLI binary...");
-    const installedCli = path.join(tempDir, "node_modules", "@specsync", "cli", "dist", "cli.js");
+    const installedCli = path.join(tempDir, "node_modules", "@specsyncs", "cli", "dist", "cli.js");
     if (!fs.existsSync(installedCli)) {
       throw new Error(`Installed CLI not found at ${installedCli}`);
     }
@@ -163,9 +163,9 @@ export async function runPackSmokeTest(): Promise<void> {
     console.log("✔ CLI drift detection check passed (exit 1).");
 
     // 5. Test Programmatic ESM Import
-    console.log("\nStep 5: Testing programmatic ESM import of @specsync/cli...");
+    console.log("\nStep 5: Testing programmatic ESM import of @specsyncs/cli...");
     const testImportScript = `
-import { runCheck, extractExpressRoutes, parseOpenApiSpec, compareRoutes } from "@specsync/cli";
+import { runCheck, extractExpressRoutes, parseOpenApiSpec, compareRoutes } from "@specsyncs/cli";
 
 if (typeof runCheck !== "function") throw new Error("runCheck is not a function");
 if (typeof extractExpressRoutes !== "function") throw new Error("extractExpressRoutes is not a function");
